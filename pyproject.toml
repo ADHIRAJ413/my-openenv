@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openenv-email-triage-env"
+version = "1.0.0"
+description = "Email Triage Environment for OpenEnv — AI agent training environment for email inbox management"
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Scaler AI Labs"},
+]
+dependencies = [
+    # Core OpenEnv dependencies
+    "openenv-core[core]>=0.2.2",
+    "fastapi>=0.115.0",
+    "pydantic>=2.0.0",
+    "uvicorn>=0.24.0",
+    "requests>=2.31.0",
+    "websockets>=12.0",
+]
+
+[project.optional-dependencies]
+baseline = [
+    "openai>=1.0.0",
+]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+all = [
+    "openenv-email-triage-env[baseline,dev]",
+]
+
+[project.scripts]
+server = "server.app:main"
+
+[tool.setuptools]
+include-package-data = true
+packages = ["server"]
